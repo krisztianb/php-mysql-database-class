@@ -101,3 +101,10 @@ echo $db->lastInsertID();
 ```php
 $db->close();
 ```
+
+# Disclaimer
+
+The original class was published by David Adams on 2020-03-05 at https://codeshack.io/super-fast-php-mysql-database-class/ under the MIT license.
+
+I brought it here to Github in order to improve it with the help of anybody that is interested in this piece of code.
+If you find bugs or want ot improve the code, please create an issue or pull request. Thanks.

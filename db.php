@@ -32,9 +32,8 @@ class db
 
     public function query($query)
     {
-        if (!$this->query_closed) {
-            $this->query->close();
-        }
+        $this->closeOpenQuery();
+
         if ($this->query = $this->connection->prepare($query)) {
             if (func_num_args() > 1) {
                 $x = func_get_args();
@@ -89,8 +88,7 @@ class db
                 $result[] = $r;
             }
         }
-        $this->query->close();
-        $this->query_closed = TRUE;
+        $this->closeOpenQuery();
         return $result;
     }
 
@@ -109,8 +107,7 @@ class db
                 $result[$key] = $val;
             }
         }
-        $this->query->close();
-        $this->query_closed = TRUE;
+        $this->closeOpenQuery();
         return $result;
     }
 
@@ -148,6 +145,14 @@ class db
         if (is_float($var)) return 'd';
         if (is_int($var)) return 'i';
         return 'b';
+    }
+
+    private function closeOpenQuery()
+    {
+        if (!$this->query_closed) {
+            $this->query->close();
+            $this->query_closed = TRUE;
+        }
     }
 }
 ?>

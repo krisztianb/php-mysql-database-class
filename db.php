@@ -113,6 +113,7 @@ class db
 
     public function close()
     {
+        $this->closeOpenQuery();
         return $this->connection->close();
     }
 
